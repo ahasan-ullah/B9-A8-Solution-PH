@@ -1,9 +1,17 @@
 import { useLoaderData, useParams } from "react-router-dom";
+import { addToStoredList } from "../../Utility/addToDB";
 
 const BookDetails = () => {
   const data = useLoaderData();
+
   const { bookId } = useParams();
+
   const book = data.find((book) => book.bookId === parseInt(bookId));
+
+  const handleButton=(bookId,btn)=>{
+    addToStoredList(bookId,btn);
+  }
+
   return (
     <div className="my-10 flex flex-col md:flex-row gap-10">
       <div className="md:w-1/2 p-10 flex items-center justify-center bg-gray-100 rounded-lg">
@@ -48,8 +56,8 @@ const BookDetails = () => {
         </p>
         <br />
         <div className="space-x-5">
-          <button className="btn btn-accent">Read</button>
-          <button className="btn btn-outline">Whishlist</button>
+          <button onClick={()=>handleButton(book.bookId,'read-list')} className="btn btn-accent">Read</button>
+          <button onClick={()=>handleButton(book.bookId,'wish-list')} className="btn btn-outline">Wishlist</button>
         </div>
       </div>
     </div>
