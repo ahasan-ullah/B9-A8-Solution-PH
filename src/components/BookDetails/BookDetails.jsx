@@ -1,5 +1,6 @@
 import { useLoaderData, useParams } from "react-router-dom";
 import { addToStoredList } from "../../Utility/addToDB";
+import { Helmet } from "react-helmet-async";
 
 const BookDetails = () => {
   const data = useLoaderData();
@@ -8,12 +9,15 @@ const BookDetails = () => {
 
   const book = data.find((book) => book.bookId === parseInt(bookId));
 
-  const handleButton=(bookId,btn)=>{
-    addToStoredList(bookId,btn);
-  }
+  const handleButton = (bookId, btn) => {
+    addToStoredList(bookId, btn);
+  };
 
   return (
     <div className="my-10 flex flex-col md:flex-row gap-10">
+      <Helmet>
+        <title>Boi Poka | {book.bookName}</title>
+      </Helmet>
       <div className="md:w-1/2 p-10 flex items-center justify-center bg-gray-100 rounded-lg">
         <img className="w-96 md:w-full rounded-lg" src={book.image} alt="" />
       </div>
@@ -56,8 +60,18 @@ const BookDetails = () => {
         </p>
         <br />
         <div className="space-x-5">
-          <button onClick={()=>handleButton(book.bookId,'read-list')} className="btn btn-accent">Read</button>
-          <button onClick={()=>handleButton(book.bookId,'wish-list')} className="btn btn-outline">Wishlist</button>
+          <button
+            onClick={() => handleButton(book.bookId, "read-list")}
+            className="btn btn-accent"
+          >
+            Read
+          </button>
+          <button
+            onClick={() => handleButton(book.bookId, "wish-list")}
+            className="btn btn-outline"
+          >
+            Wishlist
+          </button>
         </div>
       </div>
     </div>

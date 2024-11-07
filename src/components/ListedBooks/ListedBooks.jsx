@@ -4,6 +4,7 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import { getStoredList } from "../../Utility/addToDB";
 import Book from "../Book/Book";
+import { Helmet } from "react-helmet-async";
 
 const ListedBooks = () => {
   const allBooks = useLoaderData();
@@ -22,6 +23,9 @@ const ListedBooks = () => {
 
   return (
     <div className="my-10">
+      <Helmet>
+        <title>Boi Poka | Listed Books</title>
+      </Helmet>
       <h3 className="text-3xl font-bold">Listed Books</h3>
       <Tabs className="my-8">
         <TabList className="font-semibold text-xl">
